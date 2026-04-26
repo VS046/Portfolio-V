@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vedika Swami | Full Stack Mastermind</title>
+  <meta name="description"
+    content="Portfolio of Vedika Swami, a Full Stack Developer creating high-fidelity digital experiences." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- MASTERPIECE LAYERS -->
+  <div class="cursor-dot"></div>
+  <div class="cursor-outline"></div>
+
+  <div class="bg-experience">
+    <div class="bg-grid"></div>
+    <div class="bg-glow" id="mouseGlow"></div>
+    <canvas id="particleCanvas"></canvas>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">VS<span>.</span></a>
+      <div class="nav-links">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button id="themeToggle" class="btn btn-secondary" style="
+              padding: 0.6rem;
+              border-radius: 12px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 45px;
+              height: 45px;
+            ">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero-section">
+      <div class="hero-container">
+        <div class="hero-content float-anim">
+          <span class="hero-pretitle reveal-left">BUILDING MODERN WEB EXPERIENCES</span>
+          <h1 class="hero-title reveal-left">
+            Vedika <span class="text-gradient">Swami</span>
+          </h1>
+          <h2 class="reveal-left" style="
+                font-size: 2rem;
+                margin-top: -1rem;
+                margin-bottom: 2rem;
+                color: var(--arctic-primary);
+              ">
+            MERN Stack Developer
+          </h2>
+          <p class="hero-description reveal-left">
+            I’m a passionate MERN stack developer currently pursuing BCA,
+            focused on building responsive and scalable web applications. I
+            enjoy turning ideas into real-world projects while continuously
+            learning modern technologies and best practices.
+          </p>
+          <div class="hero-buttons reveal-left">
+            <a href="#projects" class="btn btn-primary">View Projects</a>
+            <a href="#contact" class="btn btn-secondary">Contact Me</a>
+          </div>
+        </div>
+        <div class="hero-visual reveal-right">
+          <div class="terminal-card float-anim" style="animation-delay: 1s">
+            <div class="terminal-header">
+              <span class="terminal-dot red"></span>
+              <span class="terminal-dot yellow"></span>
+              <span class="terminal-dot green"></span>
+            </div>
+            <div class="terminal-content">
+              <pre><code><span style="color: #c678dd;">const</span> <span style="color: #d19a66;">developer</span> = {
+  <span style="color: #e06c75;">name</span>: <span style="color: #98c379;">"Vedika Swami"</span>,
+  <span style="color: #e06c75;">role</span>: <span style="color: #98c379;">"MERN Stack Developer"</span>,
+  <span style="color: #e06c75;">focus</span>: <span style="color: #98c379;">"Web Development"</span>,
+  <span style="color: #e06c75;">status</span>: <span style="color: #98c379;">"Learning & Building"</span>
+};</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="section-container">
+        <div class="section-header reveal">
+          <span class="section-num">01.</span>
+          <h2 class="section-title">Philosophy & Approach</h2>
+        </div>
+        <div class="about-bento">
+          <!-- LEFT SIDE: LARGE PHILOSOPHY CARD -->
+          <div class="bento-item philosophy-card reveal-left">
+            <div class="bento-content">
+              <h3>Philosophy</h3>
+              <p class="bento-text">
+                I’m a passionate full-stack developer focused on building
+                scalable, high-performance web applications. I enjoy
+                transforming complex backend logic into seamless and intuitive
+                user experiences. Currently pursuing BCA while gaining
+                hands-on industry experience, I continuously strive to write
+                clean, efficient code and deliver real-world solutions that
+                create impact.
+              </p>
+              <div class="philosophy-stats">
+                <div class="stat-pill">
+                  <span class="stat-num">5+</span>
+                  <span class="stat-text">Projects Completed</span>
+                </div>
+                <div class="stat-pill">
+                  <span class="stat-num">∞</span>
+                  <span class="stat-text">Real-world Applications Built</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT SIDE: THREE SMALLER CARDS -->
+          <div class="about-right-stack">
+            <div class="bento-item small-card reveal-right accent-cyan">
+              <h3>Efficiency</h3>
+              <p>
+                Improving application performance by optimizing API calls,
+                reducing load times, and implementing efficient state
+                management techniques.
+              </p>
+            </div>
+            <div class="bento-item small-card reveal-right accent-teal" style="transition-delay: 0.2s">
+              <h3>Security</h3>
+              <p>
+                Implementing secure authentication systems using JWT,
+                role-based access control, and best practices to ensure data
+                protection.
+              </p>
+            </div>
+            <div class="bento-item small-card reveal-right accent-cyan" style="transition-delay: 0.4s">
+              <h3>Innovation</h3>
+              <p>
+                Continuously learning and adapting to modern technologies,
+                building projects using the latest MERN stack tools and
+                frameworks.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="section-container">
+        <div class="section-header reveal">
+          <span class="section-num">02.</span>
+          <h2 class="section-title">The Arsenal</h2>
+        </div>
+        <div class="bento-grid skills-bento">
+          <!-- FRONTEND CORE -->
+          <div class="bento-item medium reveal-scale">
+            <h3>Frontend</h3>
+            <p class="bento-text" style="margin-top: 1rem; font-size: 0.95rem">
+              Crafting immersive, responsive user interfaces with a focus on
+              modern React patterns and performant state management.
+              Leveraging TypeScript and Tailwind CSS to build scalable design
+              systems.
+            </p>
+            <div class="skills-grid">
+              <span class="skill-tag">React.js</span>
+              <span class="skill-tag">Next.js</span>
+              <span class="skill-tag">JavaScript (ES6+)</span>
+              <span class="skill-tag">TypeScript</span>
+              <span class="skill-tag">Tailwind CSS</span>
+              <span class="skill-tag">HTML5</span>
+              <span class="skill-tag">CSS3</span>
+            </div>
+          </div>
+          <!-- BACKEND -->
+          <div class="bento-item reveal-scale" style="transition-delay: 0.2s">
+            <h3>Backend</h3>
+            <p class="bento-text" style="margin-top: 1rem; font-size: 0.95rem">
+              Developing robust server-side architectures using Node.js and
+              Express.js. Architecting secure RESTful APIs with JWT
+              authentication and scalable MVC patterns.
+            </p>
+            <div class="skills-grid">
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">Express.js</span>
+              <span class="skill-tag">REST APIs</span>
+              <span class="skill-tag">JWT Authentication</span>
+              <span class="skill-tag">MVC Architecture</span>
+            </div>
+          </div>
+          <!-- DATABASE -->
+          <div class="bento-item reveal-scale" style="transition-delay: 0.4s">
+            <h3>Database</h3>
+            <p class="bento-text" style="margin-top: 1rem; font-size: 0.95rem">
+              Managing and optimizing relational and non-relational data
+              ecosystems using MongoDB and MySQL. Focused on schema design and
+              data integrity.
+            </p>
+            <div class="skills-grid">
+              <span class="skill-tag">MongoDB</span>
+              <span class="skill-tag">MySQL</span>
+            </div>
+          </div>
+          <!-- FULL STACK SPECIALIZATION -->
+          <div class="bento-item large reveal-scale" style="transition-delay: 0.6s">
+            <h3>Full Stack Specialization</h3>
+            <p class="bento-text" style="margin-top: 1rem">
+              Building end-to-end web applications using the MERN stack, from
+              designing responsive user interfaces to developing scalable
+              backend systems and managing databases. Focused on writing clean
+              code, optimizing performance, and delivering real-world
+              solutions.
+            </p>
+            <div class="skills-grid" style="margin-top: 2rem">
+              <span class="skill-tag">REST APIs</span>
+              <span class="skill-tag">CRUD Operations</span>
+              <span class="skill-tag">API Integration</span>
+              <span class="skill-tag">Git & GitHub</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience" class="section">
+      <div class="section-container">
+        <div class="section-header reveal">
+          <span class="section-num">03.</span>
+          <h2 class="section-title">The Journey</h2>
+        </div>
+        <div class="bento-grid" style="grid-template-rows: auto">
+          <div class="bento-item large reveal-scale">
+            <div class="exp-header">
+              <div class="exp-title-box">
+                <span class="project-tag">Internship</span>
+                <h3 style="font-size: 2rem; margin-top: 0.5rem">
+                  MERN Stack Developer Intern
+                </h3>
+                <h4 style="color: var(--arctic-primary); margin-top: 0.2rem">
+                  Indew Technology
+                </h4>
+              </div>
+              <div class="exp-date">
+                <span class="skill-tag">June 2025 – Present</span>
+              </div>
+            </div>
+            <ul class="exp-list" style="margin-top: 2rem; list-style: none">
+              <li class="exp-item">
+                Developed and deployed multiple full-stack web applications
+                using MongoDB, Express.js, React, and Node.js.
+              </li>
+              <li class="exp-item">
+                Built and integrated RESTful APIs with JWT-based
+                authentication for secure user access.
+              </li>
+              <li class="exp-item">
+                Designed responsive and user-friendly interfaces using React
+                and modern CSS frameworks.
+              </li>
+              <li class="exp-item">
+                Optimized backend logic and database queries to improve
+                application performance and efficiency.
+              </li>
+              <li class="exp-item">
+                Collaborated using Git and GitHub for version control and
+                project management.
+              </li>
+              <li class="exp-item">
+                Gained hands-on experience in debugging, testing, and
+                deploying real-world applications.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION (BENTO) -->
+    <section id="projects" class="section">
+      <div class="section-container">
+        <div class="section-header reveal">
+          <span class="section-num">03.</span>
+          <h2 class="section-title">Selected Works</h2>
+        </div>
+        <div class="bento-grid projects-bento">
+          <!-- PROJECT 1: EMS -->
+          <div class="bento-item large project-card reveal">
+            <div>
+              <span class="project-tag">Enterprise Solution</span>
+              <h3 class="project-title">EMS - Employee Management System</h3>
+              <p class="bento-text" style="margin-top: 1rem">
+                Streamlining corporate workflows with a comprehensive
+                dashboard for employee tracking, attendance, and performance
+                analytics. Built for high-scale administrative efficiency.
+              </p>
+            </div>
+            <a href="https://ems.nuke.co.in/" target="_blank" class="project-link">Live App <span>→</span></a>
+          </div>
+          <!-- PROJECT 2: POLICY BAZAAR STYLE -->
+          <div class="bento-item project-card reveal">
+            <div>
+              <span class="project-tag">FinTech</span>
+              <h3 class="project-title">Policy Bazaar - Insurance Hub</h3>
+              <p style="
+                    color: var(--text-dim);
+                    margin-top: 1rem;
+                    font-size: 0.9rem;
+                  ">
+                A high-performance fintech platform for comparing and managing
+                insurance policies with real-time data integration.
+              </p>
+            </div>
+            <a href="#" class="project-link">View Demo <span>→</span></a>
+          </div>
+          <!-- PROJECT 3: E-COMMERCE ADMIN -->
+          <div class="bento-item project-card reveal">
+            <div>
+              <span class="project-tag">E-Commerce</span>
+              <h3 class="project-title">E-Com Admin Command Center</h3>
+              <p style="
+                    color: var(--text-dim);
+                    margin-top: 1rem;
+                    font-size: 0.9rem;
+                  ">
+                A powerful administrative interface for managing products,
+                orders, and customer data with intuitive data visualization.
+              </p>
+            </div>
+            <a href="https://admin.theactiwittycompany.com" target="_blank" class="project-link">Live App
+              <span>→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="section">
+      <div class="section-container">
+        <div class="section-header reveal">
+          <span class="section-num">04.</span>
+          <h2 class="section-title">Let's Connect</h2>
+        </div>
+        <div class="bento-grid" style="grid-template-rows: auto">
+          <div class="bento-item large reveal">
+            <form id="contactForm">
+              <div style="
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 2rem;
+                    margin-bottom: 2rem;
+                  ">
+                <input type="text" name="user_name" placeholder="Full Name" required style="
+                      background: rgba(255, 255, 255, 0.02);
+                      border: 1px solid var(--border-glass);
+                      padding: 1.2rem;
+                      border-radius: 12px;
+                      color: #fff;
+                    " />
+                <input type="email" name="user_email" placeholder="Email Address" required style="
+                      background: rgba(255, 255, 255, 0.02);
+                      border: 1px solid var(--border-glass);
+                      padding: 1.2rem;
+                      border-radius: 12px;
+                      color: #fff;
+                    " />
+              </div>
+              <textarea name="message" placeholder="Tell me about your project..." rows="6" required style="
+                    width: 100%;
+                    background: rgba(255, 255, 255, 0.02);
+                    border: 1px solid var(--border-glass);
+                    padding: 1.2rem;
+                    border-radius: 12px;
+                    color: #fff;
+                    margin-bottom: 2rem;
+                  "></textarea>
+              <button type="submit" id="submitBtn" class="btn btn-primary" style="width: 100%">
+                Transmit Message
+              </button>
+            </form>
+          </div>
+          <div class="bento-item reveal">
+            <h3>Direct Contact</h3>
+            <p style="margin-top: 1rem; color: var(--text-dim)">
+              vedikaswami946@gmail.com
+            </p>
+            <p style="margin-top: 0.5rem; color: var(--text-dim)">
+              +91 9302665622
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <p class="footer-text">© 2026 Vedika Swami. Crafted with Precision.</p>
+      <div class="social-links">
+        <a href="https://github.com/VS046" class="social-link">GitHub</a>
+        <a href="https://www.linkedin.com/in/vedika04/" class="social-link">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
