@@ -54,14 +54,17 @@ app.get("/", (req, res) => {
 });
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  pool: true,
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
 });
 
-app.post("/api/contact", customRateLimiter, (req, res) => {
+app.post("/api/contact", customRateLimiter, async (req, res) => {
   const { user_name, user_email, message } = req.body;
 
   if (!user_name || !user_email || !message) {
@@ -71,6 +74,13 @@ app.post("/api/contact", customRateLimiter, (req, res) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(user_email)) {
     return res.status(400).json({ success: false, message: "Invalid email format." });
+  }
+
+  if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+    return res.status(500).json({ 
+      success: false, 
+      message: "Server Configuration Error: Missing EMAIL_USER or EMAIL_PASS on Render!" 
+    });
   }
 
   const mailOptions = {
@@ -85,15 +95,14 @@ app.post("/api/contact", customRateLimiter, (req, res) => {
       `Message:\n${message}`,
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error("Error sending mail:", error);
-      return res.status(500).json({ success: false, message: "Email send failed: " + error.message });
-    } else {
-      console.log("Email sent: " + info.response);
-      res.status(200).json({ success: true, message: "Message Sent Successfully!" });
-    }
-  });
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Email sent successfully: " + info.response);
+    return res.status(200).json({ success: true, message: "Message Sent Successfully!" });
+  } catch (error) {
+    console.error("Error sending mail:", error);
+    return res.status(500).json({ success: false, message: "SMTP ERROR: " + error.message });
+  }
 });
 
 app.listen(PORT, () => {

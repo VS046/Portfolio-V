@@ -935,8 +935,12 @@ h3 {
   border: 1px solid var(--border-glass);
   padding: 1.2rem;
   border-radius: 12px;
-  color: #fff;
+  color: var(--text-main);
   width: 100%;
+}
+
+.contact-input::placeholder {
+  color: var(--text-dim);
 }
 
 .contact-textarea {
