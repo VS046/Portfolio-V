@@ -134,6 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function animateParticles() {
+      if (!isAnimating) return; // Stop animation loop if not visible
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach((p) => { p.update(); p.draw(); });
       requestAnimationFrame(animateParticles);
@@ -146,7 +147,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initCanvas();
     createParticles();
-    animateParticles();
+    
+    // Performance optimization: only animate when hero section is visible
+    const heroSection = document.getElementById("hero");
+    let isAnimating = true;
+
+    if (heroSection) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          isAnimating = entry.isIntersecting;
+          if (isAnimating) {
+            animateParticles();
+          }
+        });
+      }, { threshold: 0 });
+      observer.observe(heroSection);
+    } else {
+      animateParticles();
+    }
   }
 
   // --- SCROLL REVEAL ---
@@ -206,7 +224,11 @@ document.addEventListener("DOMContentLoaded", () => {
     mobileToggle.addEventListener("click", () => {
       mobileToggle.classList.toggle("active");
       navLinksList.classList.toggle("active");
-      document.body.style.overflow = navLinksList.classList.contains("active") ? "hidden" : "auto";
+      if (navLinksList.classList.contains("active")) {
+        document.body.classList.add("no-scroll");
+      } else {
+        document.body.classList.remove("no-scroll");
+      }
     });
   }
 
@@ -214,7 +236,7 @@ document.addEventListener("DOMContentLoaded", () => {
     link.addEventListener("click", () => {
       if (mobileToggle) mobileToggle.classList.remove("active");
       if (navLinksList) navLinksList.classList.remove("active");
-      document.body.style.overflow = "auto";
+      document.body.classList.remove("no-scroll");
     });
   });
 
@@ -234,7 +256,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = Object.fromEntries(formData.entries());
 
       try {
-        const response = await fetch("https://portfolio-v-69f9.onrender.com/api/contact", {
+        const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.protocol === "file:";
+        const API_URL = isLocal ? "http://localhost:5000/api/contact" : "https://portfolio-v-69f9.onrender.com/api/contact";
+        
+        const response = await fetch(API_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(data),
@@ -250,16 +275,17 @@ document.addEventListener("DOMContentLoaded", () => {
             submitBtn.disabled = false;
           }, 3000);
         } else {
-          throw new Error("Server error");
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Server error");
         }
       } catch (error) {
-        submitBtn.textContent = "TRANSMISSION FAILED";
+        submitBtn.textContent = error.message === "Failed to fetch" ? "TRANSMISSION FAILED" : error.message.toUpperCase();
         submitBtn.style.background = "#ef4444";
         setTimeout(() => {
           submitBtn.textContent = "Try Again";
           submitBtn.style.background = "var(--arctic-gradient)";
           submitBtn.disabled = false;
-        }, 3000);
+        }, 4000);
       }
     });
   }
