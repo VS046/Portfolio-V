@@ -7,15 +7,14 @@ const app = express();
 app.set("trust proxy", 1); // Allow Express to trust the reverse proxy (like Render's load balancer) to get real client IP
 const PORT = process.env.PORT || 5000;
 
-// Custom Rate Limiter (No external dependency)
 const rateLimitMap = new Map();
-const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000; // 15 minutes
-const MAX_REQUESTS = 5; // limit each IP to 5 requests per window
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
+const MAX_REQUESTS = 5;
 
 const customRateLimiter = (req, res, next) => {
   const ip = req.ip || req.connection.remoteAddress;
   const currentTime = Date.now();
-  
+
   if (!rateLimitMap.has(ip)) {
     rateLimitMap.set(ip, { count: 1, startTime: currentTime });
     return next();
@@ -23,7 +22,6 @@ const customRateLimiter = (req, res, next) => {
 
   const requestData = rateLimitMap.get(ip);
   if (currentTime - requestData.startTime > RATE_LIMIT_WINDOW_MS) {
-    // Reset window
     rateLimitMap.set(ip, { count: 1, startTime: currentTime });
     return next();
   }
@@ -46,9 +44,8 @@ setInterval(() => {
   }
 }, RATE_LIMIT_WINDOW_MS);
 
-// Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || "*", // Fallback to * if FRONTEND_URL is not set
+  origin: process.env.FRONTEND_URL || "*",
 }));
 app.use(express.json());
 
@@ -56,20 +53,17 @@ app.get("/", (req, res) => {
   res.send("Backend is running 🚀");
 });
 
-// Nodemailer Transporter Configuration
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS, // Use App Password for Gmail
+    pass: process.env.EMAIL_PASS,
   },
 });
 
-// Contact Route
 app.post("/api/contact", customRateLimiter, (req, res) => {
   const { user_name, user_email, message } = req.body;
 
-  // Basic Input Validation
   if (!user_name || !user_email || !message) {
     return res.status(400).json({ success: false, message: "All fields are required." });
   }
@@ -80,9 +74,9 @@ app.post("/api/contact", customRateLimiter, (req, res) => {
   }
 
   const mailOptions = {
-    from: process.env.EMAIL_USER, // Must be your authenticated email
+    from: process.env.EMAIL_USER,
     to: process.env.NOTIFICATION_EMAIL || process.env.EMAIL_USER,
-    replyTo: user_email, // This allows you to click 'Reply' in your email to respond to the visitor
+    replyTo: user_email,
     subject: `🚀 Portfolio Message: ${user_name}`,
     text:
       `You have a new message from your portfolio:\n\n` +
@@ -91,10 +85,8 @@ app.post("/api/contact", customRateLimiter, (req, res) => {
       `Message:\n${message}`,
   };
 
-  // Respond immediately to the client to make the UI feel fast
   res.status(200).json({ success: true, message: "Message Sent Successfully!" });
 
-  // Process the email sending asynchronously in the background
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.error("Error sending mail:", error);

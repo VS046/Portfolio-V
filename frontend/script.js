@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const scrolled = (winScroll / height) * 100;
     progressBar.style.width = scrolled + "%";
 
-    // Scroll Effect for Mobile
     if (isMobile) {
       const glow = document.getElementById("mouseGlow");
       const scrollPos = (winScroll / height) * window.innerHeight;
@@ -134,7 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function animateParticles() {
-      if (!isAnimating) return; // Stop animation loop if not visible
+      if (!isAnimating) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach((p) => { p.update(); p.draw(); });
       requestAnimationFrame(animateParticles);
@@ -147,8 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initCanvas();
     createParticles();
-    
-    // Performance optimization: only animate when hero section is visible
+
     const heroSection = document.getElementById("hero");
     let isAnimating = true;
 
@@ -258,7 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
       try {
         const isLocal = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.protocol === "file:";
         const API_URL = isLocal ? "http://localhost:5000/api/contact" : "https://portfolio-v-69f9.onrender.com/api/contact";
-        
+
         const response = await fetch(API_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
