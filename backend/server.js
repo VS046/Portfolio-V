@@ -85,13 +85,13 @@ app.post("/api/contact", customRateLimiter, (req, res) => {
       `Message:\n${message}`,
   };
 
-  res.status(200).json({ success: true, message: "Message Sent Successfully!" });
-
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       console.error("Error sending mail:", error);
+      return res.status(500).json({ success: false, message: "Email send failed: " + error.message });
     } else {
       console.log("Email sent: " + info.response);
+      res.status(200).json({ success: true, message: "Message Sent Successfully!" });
     }
   });
 });
